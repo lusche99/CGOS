@@ -134,7 +134,7 @@ void RayTrace(AOpticsManager* manager, TCanvas* can3D) { // raytracing, pointspr
     double r_inc = (2.45)*m; // radius of incident ray field - acceptance angle of one pmt pixel
     double deg = i;
 
-    double deg2 = 5;
+    double deg2 = 3;
 
     double accang = 2*TMath::ASin((r_inc)/(2*kCameraOR))*TMath::RadToDeg(); // opening angle of the light cone each pixel accepts - given trough the aperture
 
@@ -143,11 +143,10 @@ void RayTrace(AOpticsManager* manager, TCanvas* can3D) { // raytracing, pointspr
     TGeoTranslation raytr("raytr", 0, 0, 0);
 
     TGeoRotation *rayrot = new TGeoRotation();
-    rayrot->SetAngles(0,deg2,0);
+    rayrot -> RotateX(deg2);
+    rayrot -> RotateY(deg);
 
-    TVector3 dir;
-    dir.SetMagThetaPhi(1, (deg)*TMath::DegToRad(), (0)*TMath::DegToRad());
-
+    TVector3 dir(0,0,1);
 
     const int nBinsX = 5000; // number of bin in 2D Hists
     const int nBinsY = 5000; // number of bin in 2D Hists
