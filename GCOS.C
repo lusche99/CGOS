@@ -35,7 +35,7 @@ const double m = AOpticsManager::m();
 //global variables - mirror and camera parameters
 double lambda = 380 * nm;
 const double kCameraDx = 4.73*m;     //camera diameter in y
-const double kCameraDy = 0.9*m;        //camera diameter in x
+const double kCameraDy = 0.93*m;        //camera diameter in x
 
 const double kCameraOR =  4.634*m;        //camera outer Radius
 const double kCameraIR = kCameraOR-0.001*m;          //camera inner Radius
@@ -105,7 +105,7 @@ void RayTrace(AOpticsManager* manager, TCanvas* can3D) { // raytracing, pointspr
   file3 <<"#number of bins to be filled, binnumber, bincontent" << "\n";
 
 
-  const int kNdeg = 6; //number of loops, 6 is minimum
+  const int kNdeg = 31; //number of loops, 6 is minimum
   const int histsinx = kNdeg/2 ; // # of histogramms in x
   const int histsiny = 3 ;// # of histogramms in y
 
@@ -134,7 +134,7 @@ void RayTrace(AOpticsManager* manager, TCanvas* can3D) { // raytracing, pointspr
     double r_inc = (2.45)*m; // radius of incident ray field - acceptance angle of one pmt pixel
     double deg = i;
 
-    double deg2 = 3;
+    double deg2 = 5;
 
     double accang = 2*TMath::ASin((r_inc)/(2*kCameraOR))*TMath::RadToDeg(); // opening angle of the light cone each pixel accepts - given trough the aperture
 
@@ -143,7 +143,7 @@ void RayTrace(AOpticsManager* manager, TCanvas* can3D) { // raytracing, pointspr
     TGeoTranslation raytr("raytr", 0, 0, 0);
 
     TGeoRotation *rayrot = new TGeoRotation();
-    rayrot->SetAngles(0,0,deg2);
+    rayrot->SetAngles(0,deg2,0);
 
     TVector3 dir;
     dir.SetMagThetaPhi(1, (deg)*TMath::DegToRad(), (0)*TMath::DegToRad());
